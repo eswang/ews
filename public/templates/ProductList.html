@@ -1,0 +1,15 @@
+<div class="templateContainer">
+	<h1>Product List</h1>
+	<table class="table table-striped table-hover selectableTable">
+		<thead>
+			<tr><th>ID</th><th>Name</th><th>Value</th><tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="product in response.products" ng-click="open(product)">
+				<td>{{product.id}}</td>
+				<td>{{product.name}}</td>
+				<td>{{product.value}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

@@ -52,8 +52,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes(Router $router)
     {
+        // Disable "web" middleware since we do not need CSRF protection
+        // for RESTful services.
         $router->group([
-            'namespace' => $this->namespace, 'middleware' => 'web',
+            'namespace' => $this->namespace, //'middleware' => 'web',
         ], function ($router) {
             require app_path('Http/routes.php');
         });

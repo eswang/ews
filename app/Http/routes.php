@@ -1,4 +1,9 @@
 <?php
+// Name: routes.php
+// Description: The routes that this Laravel service will support.
+//
+// History:
+// Edward Wang   4/18/2017  Created.
 
 /*
 |--------------------------------------------------------------------------
@@ -12,5 +17,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+// For REST
+Route::resource('product', 'ProductController');
+
+// For Angular
+Route::get('uiProduct', function() {
+    return view('home');
+});
+Route::get('uiProduct/{id}', function() {
+    return view('home');
+});
+Route::get('uiNewProduct', function() {
+    return view('home');
 });

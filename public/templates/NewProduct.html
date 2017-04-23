@@ -1,0 +1,26 @@
+<div class="templateContainer">
+	<div class="container">
+		<h1>New Product</h1>
+		<form name="productForm">
+			<fieldset>				
+				<label for="productName">Name:</label>
+				<input id="productName" type="text" required ng-model="response.product.name" placeholder="Name of your product..." />
+				<label for="productDescription">Description:</label>
+				<textarea id="productDescription" required rows="4" maxlength="500" ng-model="response.product.description" placeholder="Description of your product..."></textarea>				
+				<label for="productWidth">Width:</label>
+				<input id="productWidth" type="text" required ng-pattern="dimensionPat" ng-model="response.product.width" placeholder="Inches" />
+				<label for="productLength">Length:</label>
+				<input id="productLength" type="text" required ng-pattern="dimensionPat" ng-model="response.product.length" placeholder="Inches" />
+				<label for="productHeight">Height:</label>
+				<input id="productHeight" type="text" required ng-pattern="dimensionPat" ng-model="response.product.height" placeholder="Inches" />
+				<label for="productWeight">Weight:</label>
+				<input id="productWeight" type="text" required ng-pattern="weightPat" ng-model="response.product.weight" placeholder="Pounds" />
+				<label for="productValue">Value:</label>
+				<input id="productValue" type="text" required ng-pattern="moneyPat" ng-model="response.product.value" placeholder="Money" />				
+			</fieldset>
+			<br />
+			<button type="submit" ng-disabled="productForm.$invalid" ng-click="saveProduct(response.product, productForm)" class="btn btn-primary">Save</button>
+			<button type="button" ng-click="cancelEdit()" class="btn btn-default">Cancel</button>
+		</form>
+	</div>
+</div>

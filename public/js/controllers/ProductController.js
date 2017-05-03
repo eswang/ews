@@ -35,19 +35,17 @@ merchantApp.controller('ProductController',
 
 		// "Callback" for the Delete button.
 		$scope.deleteProduct = function(product, productForm) {
-			if(productForm.$valid) {
-				productData.delete(product.id)
-					.$promise
-					.then(function(response) { 
-						$log.log('success', response)
-						// Once the save succeeds, navigate to the /uiProduct
-						// route (Product List page).
-						$location.url("/uiProduct");
-					})
-					.catch(function(response) { 
-						$log.log('failure', response)
-					});
-			}
+			productData.delete(product.id)
+			.$promise
+			.then(function(response) { 
+				$log.log('success', response)
+				// Once the save succeeds, navigate to the /uiProduct
+				// route (Product List page).
+				$location.url("/uiProduct");
+			})
+			.catch(function(response) { 
+				$log.log('failure', response)
+			});
 		};		
 
 		// "Callback" for the Cancel button.

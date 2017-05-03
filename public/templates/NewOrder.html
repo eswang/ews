@@ -1,0 +1,29 @@
+<div class="templateContainer">
+	<div class="container">
+		<h1>New Order</h1>
+		<form name="orderForm">
+			{{message}}
+			<fieldset>				
+				<label for="orderRecipientName">Recipient Name:</label>
+				<input id="orderRecipientName" type="text" required ng-model="response.order.recipient_name" />
+				<label for="orderAddress">Address:</label>
+				<input id="orderAddress" type="text" required ng-pattern="streetAddrPat" ng-model="response.order.address" />
+				<label for="orderCity">City:</label>
+				<input id="orderCity" type="text" required ng-pattern="cityPat" ng-model="response.order.city" />
+				<label for="orderState">State:</label>
+				<input id="orderState" type="text" required ng-pattern="statePat" ng-model="response.order.state" placeholder="Two letter abbreviation"/>
+				<label for="orderZipcode">ZIP Code:</label>
+				<input id="orderZipcode" type="text" required ng-pattern="zipcodePat" ng-model="response.order.zipcode" />
+				<label for="orderPhone">Phone:</label>
+				<input id="orderPhone" type="text" required ng-pattern="phonePat" ng-model="response.order.phone" />
+				<label for="orderProductID">Product ID:</label>
+				<input id="orderProductID" type="text" required ng-pattern="numberPat" ng-model="response.order.product_id" placeholder="Number" />
+				<label for="orderQuantity">Quantity:</label>
+				<input id="orderQuantity" type="text" required ng-pattern="numberPat" ng-model="response.order.quantity" placeholder="Number"/>
+			</fieldset>
+			<br />
+			<button type="submit" ng-disabled="orderForm.$invalid" ng-click="saveOrder(response.order, orderForm)" class="btn btn-primary">Save</button>
+			<button type="button" ng-click="cancelEdit()" class="btn btn-default">Cancel</button>
+		</form>
+	</div>
+</div>

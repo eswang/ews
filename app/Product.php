@@ -1,4 +1,10 @@
 <?php
+// Name: Product.php
+// Description: The Laravel model class that will interface with the 
+// "products" table in the database.
+//
+// History:
+// Edward Wang   4/19/2017  Created.
 
 namespace App;
 
@@ -16,4 +22,9 @@ class Product extends Model
         'weight',
         'value',
     ];
+    
+    public function orders()
+    {
+        $this->hasMany('App\Order');
+    }
 }

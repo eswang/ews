@@ -31,6 +31,24 @@ var merchantApp = angular.module('merchantApp', ['ngResource', 'ngRoute'])
 				templateUrl: 'templates/ProductDetails.html',
 				controller: 'ProductController',
 			});
+		// New Order page.
+		$routeProvider.when('/uiNewOrder',
+			{
+				templateUrl: 'templates/NewOrder.html',
+				controller: 'NewOrderController'
+			});
+		// Order List page.
+		$routeProvider.when('/uiOrder',
+			{
+				templateUrl: 'templates/OrderList.html',
+				controller: 'OrderListController'
+			});
+		// Order page.
+		$routeProvider.when('/uiOrder/:orderId',
+			{
+				templateUrl: 'templates/OrderDetails.html',
+				controller: 'OrderController',
+			});
 		// Default - goto Product List page.
 		$routeProvider.otherwise({redirectTo: '/uiProduct'});
 		

@@ -17,6 +17,8 @@
 			<ul class="nav">
 				<li><a href="#" ng-click="listProducts()">Product List</a></li>
 				<li><a href="#" ng-click="createProduct()">New Product</a></li>
+				<li><a href="#" ng-click="listOrders()">Order List</a></li>
+				<li><a href="#" ng-click="createOrder()">New Order</a></li>
 			</ul>
 		</div>
 	</div>
@@ -28,22 +30,26 @@
 </div>
 
 <!-- Bootstrap -->
-<script src="{{asset('lib/bootstrap.min.js')}}"></script>
+<script src="lib/bootstrap.min.js"></script>
 
 <!-- AngularJS -->
-<script src="{{asset('lib/angular/angular.js')}}"></script>
+<script src="lib/angular/angular.js"></script>
 <!--  AngularJS $resource module -->
-<script src="{{asset('lib/angular/angular-resource.js')}}"></script>
+<script src="lib/angular/angular-resource.js"></script>
 <!--  AngularJS route module -->
-<script src="{{asset('lib/angular/angular-route.min.js')}}"></script>
+<script src="lib/angular/angular-route.min.js"></script>
 
 <!-- This where we actually do stuff -->
-<script src="{{asset('js/app.js')}}"></script>
-<script src="{{asset('js/controllers/MainMenuController.js')}}"></script>
-<script src="{{asset('js/controllers/ProductListController.js')}}"></script>
-<script src="{{asset('js/controllers/ProductController.js')}}"></script>
-<script src="{{asset('js/controllers/NewProductController.js')}}"></script>
-<script src="{{asset('js/services/ProductData.js')}}"></script>
+<script src="js/app.js"></script>
+<script src="js/controllers/MainMenuController.js"></script>
+<script src="js/controllers/ProductListController.js"></script>
+<script src="js/controllers/ProductController.js"></script>
+<script src="js/controllers/NewProductController.js"></script>
+<script src="js/controllers/OrderListController.js"></script>
+<script src="js/controllers/OrderController.js"></script>
+<script src="js/controllers/NewOrderController.js"></script>
+<script src="js/services/ProductData.js"></script>
+<script src="js/services/OrderData.js"></script>
 
 </body>
 </html>

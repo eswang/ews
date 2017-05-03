@@ -18,4 +18,16 @@ merchantApp.controller('MainMenuController',
 			// Navigate to the /uiProduct route (Product List page).
 			$location.url('/uiProduct');
 		}
+		
+		// "Callback" for the New Order button.
+		$scope.createOrder = function() {
+			// Navigate to the /uiNewOrder route (New Order page).
+			$location.url('/uiNewOrder');
+		}
+		
+		// "Callback" for the Order List button.
+		$scope.listOrders = function() {
+			// Navigate to the /uiOrder route (Order List page).
+			$location.url('/uiOrder');
+		}
 	});

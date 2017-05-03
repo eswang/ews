@@ -22,8 +22,10 @@ Route::get('/', function () {
 
 // For REST
 Route::resource('product', 'ProductController');
+Route::resource('order', 'OrderController');
 
-// For Angular
+// For Angular - to support HTML routing.  Angular routes need to be redirected
+// to the home page in order for them to work correctly.
 Route::get('uiProduct', function() {
     return view('home');
 });
@@ -31,5 +33,14 @@ Route::get('uiProduct/{id}', function() {
     return view('home');
 });
 Route::get('uiNewProduct', function() {
+    return view('home');
+});
+Route::get('uiOrder', function() {
+    return view('home');
+});
+Route::get('uiOrder/{id}', function() {
+    return view('home');
+});
+Route::get('uiNewOrder', function() {
     return view('home');
 });

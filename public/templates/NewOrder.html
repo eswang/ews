@@ -18,6 +18,26 @@
 				<input id="orderPhone" type="text" required ng-pattern="phonePat" ng-model="response.order.phone" />
 				<label for="orderProductID">Product ID:</label>
 				<input id="orderProductID" type="text" required ng-pattern="numberPat" ng-model="response.order.product_id" placeholder="Number" />
+				<button type="button" ng-click="showProductDetails()" class="btn">Show Details</button>
+				<button type="button" ng-click="hideProductDetails()" ng-disabled="!showProduct" class="btn">Hide</button>
+				<fieldset ng-show="showProduct">
+					<dl class="dl-horizontal">
+						<dt>Name:</dt>
+						<dd>{{responseProduct.product.name}}</dd>
+						<dt>Description:</dt>
+						<dd>{{responseProduct.product.description}}</dd>
+						<dt>Width:</dt>
+						<dd>{{responseProduct.product.width}} in.</dd>
+						<dt>Length:</dt>
+						<dd>{{responseProduct.product.length}} in.</dd>
+						<dt>Height:</dt>
+						<dd>{{responseProduct.product.height}} in.</dd>
+						<dt>Weight:</dt>
+						<dd>{{responseProduct.product.weight}} lbs.</dd>
+						<dt>Value:</dt>
+						<dd>${{responseProduct.product.value}}</dd>
+					</dl>
+				</fieldset>
 				<label for="orderQuantity">Quantity:</label>
 				<input id="orderQuantity" type="text" required ng-pattern="numberPat" ng-model="response.order.quantity" placeholder="Number"/>
 			</fieldset>

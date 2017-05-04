@@ -16,18 +16,26 @@ merchantApp.controller('ProductController',
 		// Get data for the selected product via AJAX.
 		$scope.response = productData.getProduct($routeParams.productId);
 		
-		// "Callback" for the Save button.		
+		// "Callback" for the Save button.
 		$scope.saveProduct = function(product, productForm) {
+			// Update the product.
 			if(productForm.$valid) {
 				productData.update(product)
 					.$promise
-					.then(function(response) { 
+					.then(function(response) {
 						$log.log('success', response)
 						// Once the save succeeds, navigate to the /uiProduct
 						// route (Product List page).
 						$location.url("/uiProduct");
 					})
-					.catch(function(response) { 
+					.catch(function(response) {
+						if (response && 
+							response.data && 
+							response.data.msg)
+						{
+							// Display error message.
+							$scope.message = response.data.msg;
+						}
 						$log.log('failure', response)
 					});
 			}
@@ -35,6 +43,7 @@ merchantApp.controller('ProductController',
 
 		// "Callback" for the Delete button.
 		$scope.deleteProduct = function(product, productForm) {
+			// Delete the product.
 			productData.delete(product.id)
 			.$promise
 			.then(function(response) { 
@@ -43,13 +52,21 @@ merchantApp.controller('ProductController',
 				// route (Product List page).
 				$location.url("/uiProduct");
 			})
-			.catch(function(response) { 
+			.catch(function(response) {
+				if (response && 
+					response.data && 
+					response.data.msg)
+				{
+					// Display error message.
+					$scope.message = response.data.msg;
+				}
 				$log.log('failure', response)
 			});
 		};		
 
 		// "Callback" for the Cancel button.
 		$scope.cancelEdit = function() {
+			// Navigate to the /uiProduct route (Product List page).
 			$location.url("/uiProduct");
 		}
 	}

@@ -29,15 +29,18 @@ class OrderController extends Controller
         // For each order, add a link to it.
         foreach ($orders as $order)
         {
+            // Accessing the relation to product adds a "product" object to the
+            // "order" object.
+            $order->product;
             $order->view_order = [ 
                 'href' => 'order/' . $order->id,
                 'method' => 'GET',
             ];
         }
-        
+       
         // Response to client.
         $response = [
-            'msg' => 'List of all orders',
+            'msg' => 'List of all orders.',
             'orders' => $orders
         ];
         
@@ -81,7 +84,7 @@ class OrderController extends Controller
         {
             // Response to client if product does not exist.
             $response = [
-                'msg' => 'Product does not exist'
+                'msg' => 'Product does not exist.'
             ];
             $statusCode = 500;
         }
@@ -108,7 +111,7 @@ class OrderController extends Controller
                     'method' => 'GET'
                 ];
                 $response = [
-                    'msg' => 'Order created',
+                    'msg' => 'Order created.',
                     'order' => $order
                 ];
                 $statusCode = 201;
@@ -117,7 +120,7 @@ class OrderController extends Controller
             {
                 // Response to client if save was unsuccessful.
                 $response = [
-                    'msg' => 'Unable to create order'
+                    'msg' => 'Unable to create order.'
                 ];
                 $statusCode = 500;
             }
@@ -133,18 +136,31 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::findOrFail($id);
-        $order->view_order = [
-            'href' => 'order',
-            'method' => 'GET'
-        ];
+        $statusCode = 200;
+
+        $order = Order::find($id);
+        if (!$order)
+        {
+            // Response to client if the order does not exist.
+            $response = [
+                'msg' => 'Order does not exist.',
+            ];
+            $statusCode = 404;
+        }
         
-        $response = [
-            'msg' => 'Order information',
-            'order' => $order
-        ];
-        
-        return response()->json($response, 200);
+        if ($statusCode == 200)
+        {
+            $order->view_order = [
+                'href' => 'order',
+                'method' => 'GET'
+            ];
+            
+            $response = [
+                'msg' => 'Order information.',
+                'order' => $order
+            ];
+        }
+        return response()->json($response, $statusCode);
     }
 
     /**
@@ -187,7 +203,7 @@ class OrderController extends Controller
         {
             // Response to client if order does not exist.
             $response = [
-                'msg' => 'Order does not exist'
+                'msg' => 'Order does not exist.'
             ];
             $statusCode = 404;
         }
@@ -197,7 +213,7 @@ class OrderController extends Controller
         {
             // Response to client if product does not exist.
             $response = [
-                'msg' => 'Product does not exist'
+                'msg' => 'Product does not exist.'
             ];
             $statusCode = 500;
         }
@@ -224,7 +240,7 @@ class OrderController extends Controller
                     'method' => 'GET'
                 ];
                 $response = [
-                    'msg' => 'Order updated',
+                    'msg' => 'Order updated.',
                     'order' => $order
                 ];
                 $statusCode = 200;
@@ -232,7 +248,7 @@ class OrderController extends Controller
             else
             {
                 // Response to client if save was unsuccessful.
-                $response = ['msg' => 'Unable to update order'];
+                $response = ['msg' => 'Unable to update order.'];
                 $statusCode = 404;
             }
         }
@@ -255,7 +271,7 @@ class OrderController extends Controller
         {
             // Response to client if order does not exist.
             $response = [
-                'msg' => 'Order does not exist'
+                'msg' => 'Order does not exist.'
             ];
             $statusCode = 404;
         }
@@ -267,7 +283,7 @@ class OrderController extends Controller
             {
                 // Response to client if delete was successful.
                 $response = [
-                    'msg' => 'Order deleted',
+                    'msg' => 'Order deleted.',
                     'create' => [
                         'href' => 'order',
                         'method' => 'POST',
@@ -280,7 +296,7 @@ class OrderController extends Controller
             {
                 // Response to client if delete was unsuccessful.
                 $response = [
-                    'msg' => 'Unable to delete order'
+                    'msg' => 'Unable to delete order.'
                 ];
                 $statusCode = 404;
             }

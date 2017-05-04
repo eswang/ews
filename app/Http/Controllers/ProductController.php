@@ -36,7 +36,7 @@ class ProductController extends Controller
         
         // Response to client.
         $response = [
-            'msg' => 'List of all products',
+            'msg' => 'List of all products.',
             'products' => $products
         ];
         
@@ -95,7 +95,7 @@ class ProductController extends Controller
             ];
                 
             $response = [
-                'msg' => 'Product created',
+                'msg' => 'Product created.',
                 'product' => $product
             ];
             $statusCode = 201;
@@ -104,7 +104,7 @@ class ProductController extends Controller
         {
             // Response to client if save was unsuccessful. 
             $response = [
-                'msg' => 'Unable to create product'
+                'msg' => 'Unable to create product.'
             ];
             $statusCode = 500;
         }
@@ -120,19 +120,31 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
-        $product = Product::findOrFail($id);
-        $product->view_product = [
-            'href' => 'product',
-            'method' => 'GET'
-        ];
+        $statusCode = 200;
         
-        $response = [
-            'msg' => 'Product information',
-            'product' => $product
-        ];
+        $product = Product::find($id);
+        if (!$product)
+        {
+            // Response to client if product does not exist.
+            $response = [
+                'msg' => 'Product does not exist.'
+            ];
+            $statusCode = 404;
+        }
         
-        return response()->json($response, 200);
+        if ($statusCode == 200)
+        {
+            $product->view_product = [
+                'href' => 'product',
+                'method' => 'GET'
+            ];
+            
+            $response = [
+                'msg' => 'Product information.',
+                'product' => $product
+            ];
+        }
+        return response()->json($response, $statusCode);
     }
 
     /**
@@ -156,7 +168,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $statusCode = 500;
+        $statusCode = 200;
         
         // Extract the Name, Description, Width, Length, Height, Weight, and
         // Value submitted by the client.
@@ -169,38 +181,49 @@ class ProductController extends Controller
         $value = $request->input('value');
         
         // Get the product from the database.
-        $product = Product::findOrFail($id);
-        
-        // Update the product based on the values from the client.
-        $product->name = $name;
-        $product->description = $description;
-        $product->width = $width;
-        $product->length = $length;
-        $product->height = $height;
-        $product->weight = $weight;
-        $product->value = $value;
-        
-        // Save the updated product to the database.
-        if ($product->update())
+        $product = Product::find($id);
+        if (!$product)
         {
-            // Response to client if save was successful.
-            $product->view_product = [
-                'href' => 'product/' . $product->id,
-                'method' => 'GET'
-            ];
+            // Response to client if product does not exist.
             $response = [
-                'msg' => 'Product updated',
-                'product' => $product
+                'msg' => 'Product does not exist.'
             ];
-            $statusCode = 200;
-        }
-        else
-        {
-            // Response to client if save was unsuccessful.
-            $response = ['msg' => 'Unable to update product'];
             $statusCode = 404;
-        }         
+        }
         
+        // If product exists, save it.
+        if ($statusCode == 200)
+        {
+            // Update the product based on the values from the client.
+            $product->name = $name;
+            $product->description = $description;
+            $product->width = $width;
+            $product->length = $length;
+            $product->height = $height;
+            $product->weight = $weight;
+            $product->value = $value;
+            
+            // Save the updated product to the database.
+            if ($product->update())
+            {
+                // Response to client if save was successful.
+                $product->view_product = [
+                    'href' => 'product/' . $product->id,
+                    'method' => 'GET'
+                ];
+                $response = [
+                    'msg' => 'Product updated.',
+                    'product' => $product
+                ];
+                $statusCode = 200;
+            }
+            else
+            {
+                // Response to client if save was unsuccessful.
+                $response = ['msg' => 'Unable to update product.'];
+                $statusCode = 404;
+            }
+        }
         return response()->json($response, $statusCode);
     }
 
@@ -212,34 +235,44 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $statusCode = 500;
+        $statusCode = 200;
         
         // Get the product from the database.
-        $product = Product::findOrFail($id);
-        
-        // Delete product from the database.
-        if ($product->delete())
+        $product = Product::find($id);
+        if (!$product)
         {
-            // Response to client if delete was successful.
+            // Response to client if product does not exist.
             $response = [
-                'msg' => 'Product deleted',
-                'create' => [
-                    'href' => 'product',
-                    'method' => 'POST',
-                    'params' => 'name, description, width, length, height, weight, value'
-                ]
-            ];
-            $statusCode = 200;            
-        }
-        else
-        {
-            // Response to client if delete was unsuccessful.
-            $response = [
-                'msg' => 'Unable to delete product'
+                'msg' => 'Product does not exist.'
             ];
             $statusCode = 404;
         }
         
+        // Delete product from the database.
+        if ($statusCode == 200 )
+        {
+            if ($product->delete())
+            {
+                // Response to client if delete was successful.
+                $response = [
+                    'msg' => 'Product deleted.',
+                    'create' => [
+                        'href' => 'product',
+                        'method' => 'POST',
+                        'params' => 'name, description, width, length, height, weight, value'
+                    ]
+                ];
+                $statusCode = 200;            
+            }
+            else
+            {
+                // Response to client if delete was unsuccessful.
+                $response = [
+                    'msg' => 'Unable to delete product.'
+                ];
+                $statusCode = 404;
+            }
+        }
         return response()->json($response, $statusCode);
     }
 }

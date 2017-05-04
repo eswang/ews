@@ -24,8 +24,8 @@ class Order extends Model
         'quantity'
     ];
     
-    public function products()
+    public function product()
     {
-        $this->belongsToMany('App\Product');
+        return $this->belongsTo('App\Product');
     }
 }

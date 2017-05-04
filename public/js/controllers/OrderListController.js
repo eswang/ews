@@ -11,7 +11,7 @@ merchantApp.controller('OrderListController',
 		// Get data for all the orders via AJAX.
 		$scope.response = orderData.getAllOrders();
 		
-		// "Callback" for the Cancel button.		
+		// "Callback" for the clicking an order in the table.
 		$scope.open = function (order)
 		{
 			// Navigate to the /uiOrder/:orderId route (Order page).

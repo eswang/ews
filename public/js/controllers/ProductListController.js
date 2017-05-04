@@ -11,7 +11,7 @@ merchantApp.controller('ProductListController',
 		// Get data for all the products via AJAX.
 		$scope.response = productData.getAllProducts();
 		
-		// "Callback" for the Cancel button.		
+		// "Callback" for clicking a product in the table.
 		$scope.open = function (product)
 		{
 			// Navigate to the /uiProduct/:productId route (Product page).

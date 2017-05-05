@@ -18,9 +18,11 @@
 				<label for="orderPhone">Phone:</label>
 				<input id="orderPhone" type="text" required ng-pattern="phonePat" ng-model="response.order.phone" />
 				<label for="orderProductID">Product ID:</label>
-				<input id="orderProductID" type="text" required ng-pattern="numberPat" ng-model="response.order.product_id" />
-				<button type="button" ng-click="showProductDetails()" class="btn">Show Details</button>
-				<button type="button" ng-click="hideProductDetails()" ng-disabled="!showProduct" class="btn">Hide</button>
+				<div class="input-append">
+					<input id="orderProductID" type="text" required ng-pattern="numberPat" ng-model="response.order.product_id" />
+					<button type="button" ng-click="showProductDetails()" class="btn">Show Details</button>
+					<button type="button" ng-click="hideProductDetails()" ng-disabled="!showProduct" class="btn">Hide</button>
+				</div>
 				<fieldset ng-show="showProduct">
 					<dl class="dl-horizontal">
 						<dt>Name:</dt>

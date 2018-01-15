@@ -4,6 +4,8 @@
 //
 // History:
 // Edward Wang   4/18/2017  Created.
+// Edward Wang   1/11/2018  Remove code to handle Angular routing since it
+// is no longer necessary due to the addition of the 404.blade.php file.
 
 /*
 |--------------------------------------------------------------------------
@@ -24,23 +26,8 @@ Route::get('/', function () {
 Route::resource('product', 'ProductController');
 Route::resource('order', 'OrderController');
 
-// For Angular - to support HTML routing.  Angular routes need to be redirected
-// to the home page in order for them to work correctly.
-Route::get('uiProduct', function() {
-    return view('home');
-});
-Route::get('uiProduct/{id}', function() {
-    return view('home');
-});
-Route::get('uiNewProduct', function() {
-    return view('home');
-});
-Route::get('uiOrder', function() {
-    return view('home');
-});
-Route::get('uiOrder/{id}', function() {
-    return view('home');
-});
-Route::get('uiNewOrder', function() {
-    return view('home');
-});
+
+// In order for Angular to work we had to create resources/views/errors/404.blade.php
+// to redirect Angular routes to the home page.
+// e.g.,
+// header("Location: http://{$_SERVER['SERVER_NAME']}/");

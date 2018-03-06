@@ -1,26 +1,40 @@
 <div class="templateContainer">
 	<div class="container">
 		<h1>New Product</h1>
-		<form name="productForm">
-			<fieldset>				
-				<label for="productName">Name:</label>
-				<input id="productName" type="text" required ng-model="response.product.name" placeholder="Name of your product..." />
-				<label for="productDescription">Description:</label>
-				<textarea id="productDescription" required rows="4" maxlength="500" ng-model="response.product.description" placeholder="Description of your product..."></textarea>				
-				<label for="productWidth">Width:</label>
-				<input id="productWidth" type="text" required ng-pattern="dimensionPat" ng-model="response.product.width" placeholder="Inches" />
-				<label for="productLength">Length:</label>
-				<input id="productLength" type="text" required ng-pattern="dimensionPat" ng-model="response.product.length" placeholder="Inches" />
-				<label for="productHeight">Height:</label>
-				<input id="productHeight" type="text" required ng-pattern="dimensionPat" ng-model="response.product.height" placeholder="Inches" />
-				<label for="productWeight">Weight:</label>
-				<input id="productWeight" type="text" required ng-pattern="weightPat" ng-model="response.product.weight" placeholder="Pounds" />
-				<label for="productValue">Value:</label>
-				<input id="productValue" type="text" required ng-pattern="moneyPat" ng-model="response.product.value" placeholder="Money" />				
+		<form name="productForm" class="col-md-6">
+			<fieldset>
+				<div class="form-group">
+					<label for="productName">Name:</label>
+					<input id="productName" class="form-control" type="text" required ng-model="response.product.name" placeholder="Name of your product..." />
+				</div>
+				<div class="form-group">
+					<label for="productDescription">Description:</label>
+					<textarea id="productDescription" class="form-control" required rows="4" maxlength="500" ng-model="response.product.description" placeholder="Description of your product..."></textarea>
+				</div>
+				<div class="form-group">
+					<label for="productWidth">Width:</label>
+					<input id="productWidth" class="form-control" type="text" required ng-pattern="dimensionPat" ng-model="response.product.width" placeholder="Inches" />
+				</div>
+				<div class="form-group">
+					<label for="productLength">Length:</label>
+					<input id="productLength" class="form-control" type="text" required ng-pattern="dimensionPat" ng-model="response.product.length" placeholder="Inches" />
+				</div>
+				<div class="form-group">
+					<label for="productHeight">Height:</label>
+					<input id="productHeight" class="form-control" type="text" required ng-pattern="dimensionPat" ng-model="response.product.height" placeholder="Inches" />
+				</div>
+				<div class="form-group">
+					<label for="productWeight">Weight:</label>
+					<input id="productWeight" class="form-control" type="text" required ng-pattern="weightPat" ng-model="response.product.weight" placeholder="Pounds" />
+				</div>
+				<div class="form-groupr">
+					<label for="productValue">Value:</label>
+					<input id="productValue" class="form-control" type="text" required ng-pattern="moneyPat" ng-model="response.product.value" placeholder="Money" />
+				</div>
 			</fieldset>
 			<br />
 			<button type="submit" ng-disabled="productForm.$invalid" ng-click="saveProduct(response.product, productForm)" class="btn btn-primary">Save</button>
 			<button type="button" ng-click="cancelEdit()" class="btn btn-default">Cancel</button>
 		</form>
 	</div>
-</div>
+</div> 

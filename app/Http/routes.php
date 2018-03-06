@@ -18,16 +18,36 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+
+
+//Route::get('/info', function() {
+//    phpinfo();
+//});
 
 // For REST
 Route::resource('product', 'ProductController');
 Route::resource('order', 'OrderController');
 
 
-// In order for Angular to work we had to create resources/views/errors/404.blade.php
-// to redirect Angular routes to the home page.
-// e.g.,
-// header("Location: http://{$_SERVER['SERVER_NAME']}/");
+// Need to use middleware on routes or else we get "Undefined variable: errors."
+// (We disabled middleware in app/Providers/RouteServiceProvider.php for REST.)
+Route::group(['middleware' => ['web']], function () {
+    //routes here
+    Route::get('/', function() {
+        return view('home');
+    })->middleware('auth');
+
+    // Built-in Laravel routes for login and registration.
+    Route::auth();
+
+    // Route::get('/home', 'HomeController@index')->middleware('auth');
+    
+    // This captures all other routes, which will usually be our angular routes.
+    Route::any('{all}', function($missingRoute) {
+        return view('home');
+    })->where('all', '(.*)')->middleware('auth');
+    
+
+});
+
+
